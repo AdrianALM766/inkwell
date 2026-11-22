@@ -1,39 +1,72 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="stylesheet" href="styles.css" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Tauri App</title>
-    <script type="module" src="/main.js" defer></script>
-  </head>
-
-  <body>
-    <main class="container">
-      <h1>Welcome to Tauri</h1>
-
-      <div class="row">
-        <a href="https://tauri.app" target="_blank">
-          <img src="/assets/tauri.svg" class="logo tauri" alt="Tauri logo" />
-        </a>
-        <a
-          href="https://developer.mozilla.org/en-US/docs/Web/JavaScript"
-          target="_blank"
-        >
-          <img
-            src="/assets/javascript.svg"
-            class="logo vanilla"
-            alt="JavaScript logo"
-          />
-        </a>
+<!DOCTYPE html>
+<!--El data-theme es para poder definir temas globales-->
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>InkWell</title>
+  <script type="module" src="/main.js" defer></script>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <!--el div encierra nuestra ventana que sera dividida en dos grandes columnas
+  una barra y donde se lee-->
+  <div class="app-shell">
+    <!--Esta es nuestra barra lateral-->
+    <aside class="sidebar">
+      <!--nuestra barra de opciones esta a la izquierda-->
+      <nav class="sidebar-tabs">
+        <!-- aqui debemos poner un logitipo para inkwell que nos devuelva a la biblioteca-->
+        <button id="btn-home" class="brand-logo">Ink<br>Well</button>
+        <button id="btn-add" title="Añadir Libro" aria-label="Añadir Libro">+</button>
+        <button id="btn-delete" title="Eliminar Libro" aria-label="Eliminar Libro">-</button>
+        <button id="btn-settings" title="Ajustes" aria-label="Ajustes">*</button>
+      </nav>
+      <div id="settings-popover" class="settings-popover hidden">
+        <button id="btn-dark-theme">Dark Theme</button>
+        <button id="btn-light-theme">Light Theme</button>
+        <button id="btn-papiro-theme">Papiro Theme</button>
+        <button id="btn-small-letter">A-</button>
+        <button id="btn-big-letter">A+</button>
       </div>
-      <p>Click on the Tauri logo to learn more about the framework</p>
+    </aside>
 
-      <form class="row" id="greet-form">
-        <input id="greet-input" placeholder="Enter a name..." />
-        <button type="submit">Greet</button>
-      </form>
-      <p id="greet-msg"></p>
+    <!--Aqui leeremos contenido-->
+    <!-- lo dividimos en dos grandes secciones-->
+    <main class="workspace">
+      <!--Nuestra primera seccion es la libreria chicos let's go-->
+      <section id="view-library" class="view active">
+        <!--Barra superior con el buscador-->
+        <input type="search" id="search-input" placeholder="Buscar Libro">
+        <!--Contenedor donde iran los libros-->
+        <div id="books-grid" class="books-grid">
+          <!--Libros ficticios puestos para ver los estilos-->
+          <article class="book-card">Como adueñarse de una piscina</article>
+          <article class="book-card">Manual de brujeria para tontos</article>
+          <article class="book-card">Mancha de quijote señor barriga</article>
+          <article class="book-card">Cocinando Peak</article>
+          <article class="book-card">Comiendo Peak</article>
+        </div>
+      </section>
+      <!--En esta seccion lo que se vera es cuando abrimos un libro para leerlo-->
+      <section id="view-reader" class="view hidden">
+        <!--Ponemos un contenedor que seran las hojas del libro-->
+        <div id="book-viewer" class="book-spread">
+          <!--Las hojas propiamente dichas con lorems para probar-->
+          <div class="page">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos reprehenderit, quibusdam labore tempore hic dolore! Beatae soluta, in ea totam voluptate possimus maxime fugiat minima perferendis impedit, rerum animi consectetur?
+          </div>
+          <div class="page">
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Maiores vitae inventore alias ipsum magni sit eveniet. Suscipit inventore, neque exercitationem possimus ipsam velit et nisi ratione, deleniti nesciunt quam cum?
+          </div>
+        </div>
+        <!--el footer que nos dice el progreso con respecto al libro que estamos leyendo-->
+        <footer class="reader-footer">
+          <span id="page-indicator">pag. 1 de 100</span>
+          <progress id="reading-progress" value="42" max="100"></progress>
+        </footer>
+      </section>
     </main>
-  </body>
+  </div>
+</body>
 </html>
