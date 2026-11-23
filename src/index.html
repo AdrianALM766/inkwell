@@ -1,27 +1,36 @@
+
 <!DOCTYPE html>
-<!--El data-theme es para poder definir temas globales-->
-<html lang="en" data-theme="light">
+<!-- ES: Activa el tema oscuro global. | EN: Enables the global dark theme. -->
+<html lang="en" data-theme="dark">
 <head>
+  <!-- ES: Configura la codificación de caracteres. | EN: Sets the character encoding. -->
   <meta charset="UTF-8">
+  <!-- ES: Adapta el diseño a pantallas móviles. | EN: Makes the layout responsive on mobile screens. -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- ES: Define el nombre mostrado en el navegador. | EN: Sets the browser tab title. -->
   <title>InkWell</title>
+  <!-- ES: Carga el módulo principal de JavaScript. | EN: Loads the main JavaScript module. -->
   <script type="module" src="/main.js" defer></script>
+  <!-- ES: Vincula la hoja de estilos principal. | EN: Links the main stylesheet. -->
   <link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-  <!--el div encierra nuestra ventana que sera dividida en dos grandes columnas
-  una barra y donde se lee-->
+  <!-- ES: Contenedor principal con barra lateral y área de contenido. | EN: Main container for the sidebar and content area. -->
   <div class="app-shell">
-    <!--Esta es nuestra barra lateral-->
+    <!-- ES: Barra lateral de navegación y opciones. | EN: Navigation and options sidebar. -->
     <aside class="sidebar">
-      <!--nuestra barra de opciones esta a la izquierda-->
+      <!-- ES: Contiene los botones de navegación. | EN: Contains the navigation buttons. -->
       <nav class="sidebar-tabs">
-        <!-- aqui debemos poner un logitipo para inkwell que nos devuelva a la biblioteca-->
+        <!-- ES: Botón que muestra la biblioteca principal. | EN: Button that displays the main library. -->
         <button id="btn-home" class="brand-logo">Ink<br>Well</button>
+        <!-- ES: Botón para añadir un nuevo libro. | EN: Button for adding a new book. -->
         <button id="btn-add" title="Añadir Libro" aria-label="Añadir Libro">+</button>
+        <!-- ES: Botón para eliminar un libro. | EN: Button for deleting a book. -->
         <button id="btn-delete" title="Eliminar Libro" aria-label="Eliminar Libro">-</button>
+        <!-- ES: Botón para abrir los ajustes. | EN: Button for opening settings. -->
         <button id="btn-settings" title="Ajustes" aria-label="Ajustes">*</button>
       </nav>
+      <!-- ES: Panel emergente con opciones visuales. | EN: Popover panel with visual options. -->
       <div id="settings-popover" class="settings-popover hidden">
         <button id="btn-dark-theme">Dark Theme</button>
         <button id="btn-light-theme">Light Theme</button>
@@ -31,16 +40,15 @@
       </div>
     </aside>
 
-    <!--Aqui leeremos contenido-->
-    <!-- lo dividimos en dos grandes secciones-->
+    <!-- ES: Área principal donde se muestra la biblioteca o la lectura. | EN: Main area for the library or reader view. -->
     <main class="workspace">
-      <!--Nuestra primera seccion es la libreria chicos let's go-->
+      <!-- ES: Vista de la biblioteca de libros. | EN: Book library view. -->
       <section id="view-library" class="view active">
-        <!--Barra superior con el buscador-->
+        <!-- ES: Campo para buscar libros por nombre. | EN: Field for searching books by title. -->
         <input type="search" id="search-input" placeholder="Buscar Libro">
-        <!--Contenedor donde iran los libros-->
+        <!-- ES: Contenedor donde se muestran las tarjetas de libros. | EN: Container for displaying book cards. -->
         <div id="books-grid" class="books-grid">
-          <!--Libros ficticios puestos para ver los estilos-->
+          <!-- ES: Ejemplos temporales para probar el diseño. | EN: Temporary examples for testing the layout. -->
           <article class="book-card">Como adueñarse de una piscina</article>
           <article class="book-card">Manual de brujeria para tontos</article>
           <article class="book-card">Mancha de quijote señor barriga</article>
@@ -48,11 +56,12 @@
           <article class="book-card">Comiendo Peak</article>
         </div>
       </section>
-      <!--En esta seccion lo que se vera es cuando abrimos un libro para leerlo-->
+
+      <!-- ES: Vista utilizada para leer un libro abierto. | EN: View used for reading an opened book. -->
       <section id="view-reader" class="view hidden">
-        <!--Ponemos un contenedor que seran las hojas del libro-->
+        <!-- ES: Contenedor que representa las hojas del libro. | EN: Container representing the book pages. -->
         <div id="book-viewer" class="book-spread">
-          <!--Las hojas propiamente dichas con lorems para probar-->
+          <!-- ES: Páginas de ejemplo utilizadas para probar el diseño. | EN: Sample pages used to test the layout. -->
           <div class="page">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos reprehenderit, quibusdam labore tempore hic dolore! Beatae soluta, in ea totam voluptate possimus maxime fugiat minima perferendis impedit, rerum animi consectetur?
           </div>
@@ -60,9 +69,11 @@
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Maiores vitae inventore alias ipsum magni sit eveniet. Suscipit inventore, neque exercitationem possimus ipsam velit et nisi ratione, deleniti nesciunt quam cum?
           </div>
         </div>
-        <!--el footer que nos dice el progreso con respecto al libro que estamos leyendo-->
+        <!-- ES: Muestra el progreso actual de lectura. | EN: Displays the current reading progress. -->
         <footer class="reader-footer">
+          <!-- ES: Indica la página actual y el total. | EN: Shows the current and total page numbers. -->
           <span id="page-indicator">pag. 1 de 100</span>
+          <!-- ES: Barra visual del progreso de lectura. | EN: Visual indicator of reading progress. -->
           <progress id="reading-progress" value="42" max="100"></progress>
         </footer>
       </section>
@@ -70,3 +81,4 @@
   </div>
 </body>
 </html>
+

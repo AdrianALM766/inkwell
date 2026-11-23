@@ -1,9 +1,11 @@
-/*Para que paddings y bordes no rompan las medidas*/
+/*Mantiene las medidas al incluir bordes y rellenos.*/
+/*Keeps dimensions predictable by including borders and padding.*/
 *, *::before, *::after{
   box-sizing: border-box;
 }
 
-/*Evita escroll global solo se mueven los contenedores internos*/
+/*Evita el desplazamiento global y define el fondo de la página.*/
+/*Prevents page scrolling and sets the page background.*/
 body{
   margin: 0;
   height: 100vh;
@@ -11,9 +13,11 @@ body{
   background-color: var(--bg-window);
 }
 
-/* colores de los temas que usaremos */
+/*Define los colores compartidos por los temas.*/
+/*Defines colors shared by the themes.*/
 
-/* Tema claro (por defecto) */
+/*Configura los colores del tema claro predeterminado.*/
+/*Sets the default light theme colors.*/
 :root,
 [data-theme="light"] {
   --bg-window: rgb(235, 235, 235);
@@ -25,7 +29,8 @@ body{
   --reader-font-size: 18px;
 }
 
-/* Tema oscuro */
+/*Configura los colores del tema oscuro.*/
+/*Sets the dark theme colors.*/
 [data-theme="dark"] {
   --bg-window: rgb(24, 24, 27);
   --bg-paper: rgb(38, 38, 43);
@@ -36,7 +41,8 @@ body{
   --reader-font-size: 18px;
 }
 
-/* Tema papiro */
+/*Configura los colores del tema papiro.*/
+/*Sets the papyrus theme colors.*/
 [data-theme="papiro"] {
   --bg-window: rgb(196, 168, 120);
   --bg-paper: rgb(233, 213, 165);
@@ -47,22 +53,23 @@ body{
   --reader-font-size: 18px;
 }
 
-/*cosas ocultas cuando no son seleccionadas*/
+/*Oculta elementos que no están activos.*/
+/*Hides elements that are inactive.*/
 .hidden {display: none !important;}
 
-/*Layout maestro*/
+/*Organiza la barra lateral y el área principal.*/
+/*Lays out the sidebar and main content area.*/
 
+/*Distribuye la aplicación en dos columnas a pantalla completa.*/
+/*Arranges the full-height app into two columns.*/
 .app-shell{
   display: grid;
   grid-template-columns: 95px 1fr; /*La primera columna toma 95px y la segunda el resto*/
   height: 100vh;
 }
 
-.sidebar{
-  display: flex;
-  flex-direction: column;
-}
-
+/*Estiliza el panel principal de trabajo.*/
+/*Styles the main workspace panel.*/
 .workspace{
   background-color: var(--bg-paper);
   color: var(--text-primary);
@@ -73,3 +80,194 @@ body{
   overflow: hidden;
 }
 
+/*BLOQUE 1: organiza verticalmente la barra lateral.*/
+/*BLOCK 1: arranges the sidebar vertically.*/
+.sidebar{
+  display: flex;
+  flex-direction: column;
+  padding-top: 24px;
+  align-items: flex-end;
+  position: relative;
+  /*padding-left: 10px;
+  padding-right: 10px;*/
+}
+
+/*Da estilo al logotipo de la barra lateral.*/
+/*Styles the sidebar logo.*/
+.sidebar-tabs .brand-logo{
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--text-primary);
+  cursor: pointer;
+  background: transparent;
+  border: none;
+}
+
+/*Apila las pestañas de navegación con separación.*/
+/*Stacks navigation tabs with spacing.*/
+.sidebar-tabs{
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  padding-left: 14px;
+}
+
+/*Da estilo a los botones de navegación.*/
+/*Styles the navigation buttons.*/
+.sidebar-tabs button{
+  border-radius: 12px 0 0 12px;
+  border: 2px solid var(--border-ink);
+  border-right: none;
+  background-color: var(--bg-paper);
+  color: var(--text-primary);
+
+  cursor: pointer;
+  font-size: 1.4rem;
+  padding: 14px 0;
+  transition: transform 0.15s ease;
+}
+
+/*Desplaza el botón al pasar el cursor sobre él.*/
+/*Shifts the button when the pointer hovers over it.*/
+.sidebar-tabs button:hover{
+  transform: translateX(-4px);
+}
+
+/*Posiciona y estiliza el menú flotante de ajustes.*/
+/*Positions and styles the floating settings menu.*/
+.settings-popover{
+  position: absolute;
+  left: 95px;
+  top: 220px;
+  z-index: 10;
+
+  background-color: var(--bg-paper);
+  border: 2px solid var(--border-ink);
+  border-radius: 12px;
+  padding: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+
+}
+
+/*BLOQUE 2: organiza verticalmente la vista de biblioteca.*/
+/*BLOCK 2: arranges the library view vertically.*/
+#view-library{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/*Estiliza el campo de búsqueda de libros.*/
+/*Styles the book search field.*/
+#search-input{
+  width: 100%;
+  /*max-width: 480px;*/
+  padding: 8px 18px;
+  border-radius: 999px;
+  border: 2px solid var(--border-ink);
+  background-color: transparent;
+  color: var(--text-primary);
+  font-size: 1rem;
+  outline: none;
+}
+
+/*Muestra las tarjetas de libros en una cuadrícula desplazable.*/
+/*Displays book cards in a scrollable grid.*/
+.books-grid{
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 24px;
+  overflow-y: auto;
+  padding-right: 8px;
+  padding-top: 14px;
+}
+
+/*Da forma y estilo a cada tarjeta de libro.*/
+/*Shapes and styles each book card.*/
+.book-card{
+  aspect-ratio: 2/3;
+  border: 2px solid var(--border-ink);
+  border-radius: 6px 12px 12px 6px;
+  padding: 14px;
+  display: flex;
+  align-items: flex-end;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-weight: bold;
+  cursor: pointer;
+  background-color: var(--bg-window);
+  transition: transform 0.15s ease;
+}
+
+/*Eleva la tarjeta al pasar el cursor sobre ella.*/
+/*Lifts the card when the pointer hovers over it.*/
+.book-card:hover{
+  transform: translateY(-6px);
+}
+
+/*BLOQUE 3: organiza verticalmente la vista de lectura.*/
+/*BLOCK 3: arranges the reader view vertically.*/
+#view-reader{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+/*Crea dos páginas lado a lado dentro del libro.*/
+/*Creates two side-by-side pages in the book.*/
+.book-spread{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  flex: 1;
+  overflow: hidden;
+  border: 2px solid var(--border-ink);
+  border-radius: 12px;
+  background-color: var(--bg-paper);
+}
+
+/*Estiliza el contenido desplazable de cada página.*/
+/*Styles the scrollable content of each page.*/
+.page{
+  font-size: var(--reader-font-size);
+  line-height: 1.65;
+  padding: 32px 36px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  overflow-y: auto;
+}
+
+/*Simula la unión central entre las dos páginas.*/
+/*Simulates the center seam between the two pages.*/
+.page:first-child{
+  border-right: 2px solid var(--border-ink);
+  box-shadow: inset -12px 0 18px -12px rgba(0, 0, 0, 0.25)
+}
+
+/*Alinea los controles inferiores del lector.*/
+/*Aligns the reader's footer controls.*/
+.reader-footer{
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+/*Estiliza el indicador de página sin permitir saltos de línea.*/
+/*Styles the page indicator and prevents line wrapping.*/
+#page-indicator{
+  font-size: 0.9rem;
+  color: var(--text-muted);
+  white-space: nowrap;
+}
+
+/*Permite que la barra de progreso ocupe el espacio disponible.*/
+/*Lets the progress bar fill the available space.*/
+#reading-progress{
+  flex: 1;
+  height: 10px;
+}
